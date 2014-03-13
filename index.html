@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="tttApp">
+  <head>
+    <title>TIC TAC TOE</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+    <script src="js/tictactoe_controller.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/reset.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+  </head>
+  <body  ng-controller="ttt.TicTacToeController">
+     <div id="game" >
+        <ul id="teams">
+          <li ng-class="{current: currentPlayer.name == 'Ernie'}">
+            <img src="{{players[0].img_url}}">
+            <h2>Team <span class="team">{{players[0].marker}}</span></h2>
+            <h3 class="player">{{players[0].name}}</h3>
+          </li>
+          <li ng-class="{current: currentPlayer.name == 'Bert'}">
+            <img src="{{players[1].img_url}}">
+            <h2>Team <span class="team">{{players[1].marker}}</span></h2>
+            <h3 class="player">{{players[1].name}}</h3>
+          </li>
+        </ul>
+        <div id="board">
+          <div ng-show="isWin() || isTie()" id="results">
+            <h1>{{theEnd.message}}</h1>
+            <span class="image"><img src="{{theEnd.img_url}}" ></img></span>
+            <button ng-click="playAgain()">play again</button>
+          </div>
+        </div>
+        <div ng-repeat="tile in tiles" ng-class="{tile: true, active: tile.active}" id="tile{{tile.id}}" ng-click="handleClick(tile)" ng-bind="tile.marker">
+        </div>
+        <div ng-show="isWin() || isTie()"id="overlay">
+        </div>
+    </div>
+  </body>
+</html>
+
+
