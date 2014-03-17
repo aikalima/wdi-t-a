@@ -78,7 +78,18 @@ ttt.TicTacToeController = ($scope) ->
         message: "It's a tie!"
         img_url: "img/rubberduckie.jpg"
     else
-      $scope.currentPlayer = $scope.players[$scope.turns % 2]
+      nextPlayerIndex = $scope.turns % 2
+      $scope.currentPlayer = $scope.players[nextPlayerIndex]
+      if nextPlayerIndex == 1
+        # Computer's turn
+        $scope.handleClick pickTile()
+
+
+  pickTile = () ->
+    pool = _.select $scope.tiles, (tile) ->
+      tile.active == false
+
+    $scope.tiles[Math.floor(Math.random() * pool.length)]
 
   $scope.isTie = () ->
     $scope.turns == $scope.tiles.length
